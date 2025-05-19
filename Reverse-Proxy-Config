@@ -1,0 +1,14 @@
+# NGINX reverse proxy config for ModSecurity WAF
+
+server {
+    listen 80;
+    server_name _;
+
+    modsecurity on;
+    modsecurity_rules_file /etc/nginx/modsec/main.conf;
+
+    location / {
+        proxy_pass http://172.16.50.254;
+        include proxy_params;
+    }
+}
